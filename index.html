@@ -220,7 +220,7 @@ async function startMusic() {
         await bgMusic.play();
 
         musicEnabled = true;
-        musicBtn.textContent = "♫ MUSIC OFF";
+        musicBtn.textContent = "♫ MUSIC ON";
         musicBtn.setAttribute("aria-pressed", "true");
 
     } catch (error) {
@@ -235,7 +235,7 @@ async function startMusic() {
 function stopMusic() {
   bgMusic.pause();
   musicEnabled = false;
-  musicBtn.textContent = "♫ MUSIC ON";
+  musicBtn.textContent = "♫ MUSIC OFF";
   musicBtn.setAttribute("aria-pressed", "false");
 }
 
