@@ -213,16 +213,23 @@ const musicBtn = document.getElementById("musicBtn");
 let musicEnabled = false;
 
 async function startMusic() {
-  try {
-    await bgMusic.play();
-    musicEnabled = true;
-    musicBtn.textContent = "♫ MUSIC ON";
-    musicBtn.setAttribute("aria-pressed", "true");
-  } catch (error) {
-    musicEnabled = false;
-    musicBtn.textContent = "♫ PLAY MUSIC";
-    musicBtn.setAttribute("aria-pressed", "false");
-  }
+    try {
+        musicBtn.textContent = "♫ LOADING MUSIC...";
+
+        bgMusic.volume = 0.8;
+        await bgMusic.play();
+
+        musicEnabled = true;
+        musicBtn.textContent = "♫ MUSIC ON";
+        musicBtn.setAttribute("aria-pressed", "true");
+
+    } catch (error) {
+        console.error("Music playback error:", error);
+
+        musicEnabled = false;
+        musicBtn.textContent = "♫ TAP TO PLAY";
+        musicBtn.setAttribute("aria-pressed", "false");
+    }
 }
 
 function stopMusic() {
