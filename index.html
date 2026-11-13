@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#160f0d">
+<link rel="preload" href="./ramayana-song-compressed.mp3" as="audio" type="audio/mpeg">
 <title>Ankit & Nishu — The Wedding Journey</title>
 <style>
 :root{
@@ -89,6 +90,41 @@ border:5px ridge #d1a45e;box-shadow:inset 0 0 35px #160b08,0 0 25px #0008}
 .progress span.on{width:24px;border-radius:10px;background:#986c39}
 .invite-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
 .invite-actions button{min-width:135px}
+a.venue-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 160px;
+    padding: 14px 25px;
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    background: linear-gradient(135deg, #9e713e, #e8c98b, #9e713e);
+    color: #241713;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    font: 600 11px Arial, sans-serif;
+    box-shadow: 0 8px 30px #0007;
+    transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+}
+a.venue-btn:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.12);
+    box-shadow: 0 12px 32px #0009;
+}
+a.venue-btn .venue-arrow {
+    display: inline-block;
+    font-size: 16px;
+    transition: transform .25s ease;
+}
+a.venue-btn:hover .venue-arrow {
+    transform: translate(3px, -3px);
+}
+a.venue-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
 #finalBlessing{font-style:italic;color:#795a3e;margin-top:14px}
 #toast{position:fixed;z-index:20;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;background:#fff4df;color:#241713;padding:10px 16px;font:12px Arial,sans-serif;transition:.3s;pointer-events:none}
 #toast.show{opacity:1;transform:translate(-50%,0)}
@@ -107,13 +143,12 @@ border:5px ridge #d1a45e;box-shadow:inset 0 0 35px #160b08,0 0 25px #0008}
 <body>
 <div id="experience">
   <div class="top-controls">
-    <button id="musicBtn" type="button" aria-pressed="false">♫ MUSIC OFF</button>
     <button id="skipBtn" type="button">SKIP INTRO</button>
   </div>
 
   <!-- Add your legally obtained MP3 file beside index.html and name it ramayana-song.mp3. -->
   <audio id="bgMusic" loop preload="auto">
-    <source src="./ramayana-song.mp3" type="audio/mpeg">
+    <source src="./ramayana-song-compressed.mp3" type="audio/mpeg">
   </audio>
 
   <section class="scene active" id="gateScene" aria-label="Wedding entrance">
@@ -178,7 +213,10 @@ border:5px ridge #d1a45e;box-shadow:inset 0 0 35px #160b08,0 0 25px #0008}
           </div>
           <p id="finalBlessing">We can't wait to celebrate with you!<br>With love, Ankit &amp; Nishu</p>
           <div class="invite-actions">
-            <a class="action" style="text-decoration:none;display:inline-flex;align-items:center" href="https://www.google.com/maps/search/?api=1&query=Amora+Park+Raipur+Chhattisgarh" target="_blank" rel="noopener">VIEW VENUE ↗</a>
+            <a class="venue-btn" href="https://www.google.com/maps/search/?api=1&query=Amora+Park+Raipur+Chhattisgarh" target="_blank" rel="noopener noreferrer">
+              <span>VIEW VENUE</span>
+              <span class="venue-arrow" aria-hidden="true">↗</span>
+            </a>
             <button class="action ghost" id="shareInvite" type="button">SHARE INVITE</button>
           </div>
         </div>
@@ -209,43 +247,14 @@ function enterInvitation() {
   skipBtn.style.display = "none";
 }
 const bgMusic = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
-let musicEnabled = false;
 
-async function startMusic() {
-    try {
-        musicBtn.textContent = "♫ LOADING MUSIC...";
-
-        bgMusic.volume = 0.8;
-        await bgMusic.play();
-
-        musicEnabled = true;
-        musicBtn.textContent = "♫ MUSIC OFF";
-        musicBtn.setAttribute("aria-pressed", "true");
-
-    } catch (error) {
-        console.error("Music playback error:", error);
-
-        musicEnabled = false;
-        musicBtn.textContent = "♫ TAP TO PLAY";
-        musicBtn.setAttribute("aria-pressed", "false");
-    }
+function startMusic() {
+  bgMusic.volume = 0.8;
+  bgMusic.play().catch(error => {
+    // Playback can be delayed or blocked by browser/device settings.
+    console.error("Music playback failed:", error);
+  });
 }
-
-function stopMusic() {
-  bgMusic.pause();
-  musicEnabled = false;
-  musicBtn.textContent = "♫ MUSIC ON";
-  musicBtn.setAttribute("aria-pressed", "false");
-}
-
-musicBtn.addEventListener("click", async () => {
-  if (musicEnabled) {
-    stopMusic();
-  } else {
-    await startMusic();
-  }
-});
 
 document.getElementById("openGate").addEventListener("click", () => {
   // Browsers allow audio playback after this guest interaction.
