@@ -90,25 +90,30 @@ border:5px ridge #d1a45e;box-shadow:inset 0 0 35px #160b08,0 0 25px #0008}
 .progress span.on{width:24px;border-radius:10px;background:#986c39}
 .invite-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
 .invite-actions button{min-width:135px}
+#inviteRoom .invite-actions a.venue-btn,
+#inviteRoom a.venue-btn,
 a.venue-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
     min-width: 160px;
-    padding: 14px 25px;
-    border: 1px solid var(--gold);
-    border-radius: 999px;
-    background: linear-gradient(135deg, #9e713e, #e8c98b, #9e713e);
-    color: #241713;
-    text-decoration: none;
+    padding: 14px 25px !important;
+    border: 1px solid var(--gold) !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #9e713e, #e8c98b, #9e713e) !important;
+    color: #241713 !important;
+    text-decoration: none !important;
     text-transform: uppercase;
     letter-spacing: 1.4px;
-    font: 600 11px Arial, sans-serif;
+    font: 600 11px Arial, sans-serif !important;
     box-shadow: 0 8px 30px #0007;
     transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
 }
+#inviteRoom .invite-actions a.venue-btn:hover,
 a.venue-btn:hover {
+    color: #241713 !important;
+    text-decoration: none !important;
     transform: translateY(-3px);
     filter: brightness(1.12);
     box-shadow: 0 12px 32px #0009;
@@ -213,7 +218,7 @@ a.venue-btn:focus-visible {
           </div>
           <p id="finalBlessing">We can't wait to celebrate with you!<br>With love, Ankit &amp; Nishu</p>
           <div class="invite-actions">
-            <a class="venue-btn" href="https://www.google.com/maps/search/?api=1&query=Amora+Park+Raipur+Chhattisgarh" target="_blank" rel="noopener noreferrer">
+            <a class="venue-btn" href="https://www.google.com/maps/search/?api=1&query=Amora+Park+Raipur+Chhattisgarh" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:160px;padding:14px 25px;border:1px solid #e8c98b;border-radius:999px;background:linear-gradient(135deg,#9e713e,#e8c98b,#9e713e);color:#241713;text-decoration:none;text-transform:uppercase;letter-spacing:1.4px;font:600 11px Arial,sans-serif;box-shadow:0 8px 30px #0007;">
               <span>VIEW VENUE</span>
               <span class="venue-arrow" aria-hidden="true">↗</span>
             </a>
