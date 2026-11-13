@@ -107,7 +107,7 @@ border:5px ridge #d1a45e;box-shadow:inset 0 0 35px #160b08,0 0 25px #0008}
 <body>
 <div id="experience">
   <div class="top-controls">
-    <button id="musicBtn" type="button" aria-pressed="false">♫ MUSIC OFF</button>
+    <button id="musicBtn" type="button" aria-pressed="false">♫ MUSIC ON</button>
     <button id="skipBtn" type="button">SKIP INTRO</button>
   </div>
 
@@ -216,7 +216,7 @@ async function startMusic() {
   try {
     await bgMusic.play();
     musicEnabled = true;
-    musicBtn.textContent = "♫ MUSIC ON";
+    musicBtn.textContent = "♫ MUSIC OFF";
     musicBtn.setAttribute("aria-pressed", "true");
   } catch (error) {
     musicEnabled = false;
@@ -228,7 +228,7 @@ async function startMusic() {
 function stopMusic() {
   bgMusic.pause();
   musicEnabled = false;
-  musicBtn.textContent = "♫ MUSIC OFF";
+  musicBtn.textContent = "♫ MUSIC ON";
   musicBtn.setAttribute("aria-pressed", "false");
 }
 
